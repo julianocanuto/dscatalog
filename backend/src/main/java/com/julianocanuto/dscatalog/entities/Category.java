@@ -24,9 +24,9 @@ public class Category implements Serializable {
 
 	}
 
-	public Category(Long id, String nome) {
+	public Category(Long id, String name) {
 		this.id = id;
-		this.name = nome;
+		this.name = name;
 	}
 
 	public Long getId() {
@@ -37,12 +37,12 @@ public class Category implements Serializable {
 		this.id = id;
 	}
 
-	public String getNome() {
+	public String getName() {
 		return name;
 	}
 
-	public void setNome(String nome) {
-		this.name = nome;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Override
