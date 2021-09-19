@@ -1,10 +1,10 @@
 package com.julianocanuto.dscatalog.services.exceptions;
 
-public class ResourceNotFoundExcepetion extends RuntimeException {
+public class ResourceNotFoundException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 
-	public ResourceNotFoundExcepetion(String msg) {
+	public ResourceNotFoundException(String msg) {
 		super(msg);
 	}
 
