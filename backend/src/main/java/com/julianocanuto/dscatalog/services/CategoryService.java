@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.julianocanuto.dscatalog.dto.CategoryDTO;
 import com.julianocanuto.dscatalog.entities.Category;
 import com.julianocanuto.dscatalog.repositories.CategoryRepository;
-import com.julianocanuto.dscatalog.services.exceptions.EntityNotFoundExcepetion;
+import com.julianocanuto.dscatalog.services.exceptions.ResourceNotFoundExcepetion;
 
 @Service
 public class CategoryService {
@@ -30,7 +32,7 @@ public class CategoryService {
 	public CategoryDTO findById(Long id) {
 
 		Optional<Category> obj = repository.findById(id);
-		Category entity = obj.orElseThrow(() -> new EntityNotFoundExcepetion("Entity not found"));
+		Category entity = obj.orElseThrow(() -> new ResourceNotFoundExcepetion("Entity not found"));
 		return new CategoryDTO(entity);
 	}
 
