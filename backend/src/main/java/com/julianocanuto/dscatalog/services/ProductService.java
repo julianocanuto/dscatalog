@@ -14,8 +14,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.julianocanuto.dscatalog.dto.CategoryDTO;
 import com.julianocanuto.dscatalog.dto.ProductDTO;
+import com.julianocanuto.dscatalog.entities.Category;
 import com.julianocanuto.dscatalog.entities.Product;
+import com.julianocanuto.dscatalog.repositories.CategoryRepository;
 import com.julianocanuto.dscatalog.repositories.ProductRepository;
 import com.julianocanuto.dscatalog.services.exceptions.DatabaseException;
 import com.julianocanuto.dscatalog.services.exceptions.ResourceNotFoundException;
@@ -25,6 +28,9 @@ public class ProductService {
 
 	@Autowired
 	private ProductRepository repository;
+
+	@Autowired
+	private CategoryRepository categoryRepository;
 
 	@Transactional(readOnly = true)
 	public List<ProductDTO> findAll() {
@@ -49,16 +55,31 @@ public class ProductService {
 	@Transactional
 	public ProductDTO insert(ProductDTO dto) {
 		Product entity = new Product();
-		entity.setName(dto.getName());
+		copyDtoToEntity(dto, entity);
 		entity = repository.save(entity);
 		return new ProductDTO(entity);
+	}
+
+	private void copyDtoToEntity(ProductDTO dto, Product entity) {
+		entity.setName(dto.getName());
+		entity.setDescription(dto.getDescription());
+		entity.setDate(dto.getDate());
+		entity.setImgUrl(dto.getImgUrl());
+		entity.setPrice(dto.getPrice());
+
+		entity.getCategories().clear();
+		for (CategoryDTO catDTO : dto.getCategories()) {
+			Category category = categoryRepository.getOne(catDTO.getId());
+			entity.getCategories().add(category);
+		}
+
 	}
 
 	@Transactional
 	public ProductDTO update(Long id, ProductDTO dto) {
 		try {
 			Product entity = repository.getOne(id);
-			entity.setName(dto.getName());
+			copyDtoToEntity(dto, entity);
 			entity = repository.save(entity);
 			return new ProductDTO(entity);
 
