@@ -50,14 +50,14 @@ public class ProductServiceTests {
 		Mockito.doNothing().when(repository).deleteById(existingId);
 		Mockito.doThrow(EmptyResultDataAccessException.class).when(repository).deleteById(nonExistingId);
 		Mockito.doThrow(DataIntegrityViolationException.class).when(repository).deleteById(dependentId);
-		
-		Mockito.when(repository.findAll((Pageable)ArgumentMatchers.any())).thenReturn(page);
-		
+
+		Mockito.when(repository.findAll((Pageable) ArgumentMatchers.any())).thenReturn(page);
+
 		Mockito.when(repository.save(ArgumentMatchers.any())).thenReturn(product);
-		
+
 		Mockito.when(repository.findById(existingId)).thenReturn(Optional.of(product));
 		Mockito.when(repository.findById(nonExistingId)).thenReturn(Optional.empty());
-		
+
 	}
 
 	@Test
