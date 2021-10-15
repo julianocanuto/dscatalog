@@ -1,5 +1,6 @@
 package com.julianocanuto.dscatalog.resources;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -145,5 +146,19 @@ public class ProductResourceTests {
 		result.andExpect(jsonPath("$.imgUrl").exists());
 		result.andExpect(jsonPath("$.date").exists());
 		result.andExpect(jsonPath("$.categories").exists());
+	}
+	
+	@Test
+	public void deleteShouldReturnStatusNoContentWhenIdExists() throws Exception {
+		ResultActions result = mockMvc.perform(delete("/products/{id}", existingId)
+				.accept(MediaType.APPLICATION_JSON));
+		result.andExpect(status().isNoContent());
+	}
+	
+	@Test
+	public void deleteShouldReturnStatusNotFoundWhenIdDoesNotExists() throws Exception {
+		ResultActions result = mockMvc.perform(delete("/products/{id}", nonExistingId)
+				.accept(MediaType.APPLICATION_JSON));
+		result.andExpect(status().isNotFound());
 	}
 }
