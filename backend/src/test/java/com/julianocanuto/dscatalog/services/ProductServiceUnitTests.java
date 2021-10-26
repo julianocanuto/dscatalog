@@ -31,7 +31,7 @@ import com.julianocanuto.dscatalog.services.exceptions.ResourceNotFoundException
 import com.julianocanuto.dscatalog.tests.Factory;
 
 @ExtendWith(SpringExtension.class)
-public class ProductServiceTests {
+public class ProductServiceUnitTests {
 
 	@InjectMocks
 	private ProductService service;
