@@ -12,3 +12,10 @@ docker run -d -p 8080:8080 --name dscatalog julianocanuto/dscatalog:0.0.1-SNAPSH
 ```
 mvn spring-boot:run
 ```
+## Endpoints
+
+```
+GET /products       Retorna lista de produtos
+GET /categories     Retorna lista de categorias
+GET /product/1      Retorna produto com id igual a 1
+```
