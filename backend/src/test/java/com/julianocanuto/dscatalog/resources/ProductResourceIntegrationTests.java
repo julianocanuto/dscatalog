@@ -8,6 +8,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import javax.transaction.Transactional;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -57,6 +58,7 @@ public class ProductResourceIntegrationTests {
 	}
 	
 	@Test
+	@DisplayName("O update deveria retornar um ProductDTo quando o Id existir")
 	public void updateShouldReturnProductDTOWhenIdExists() throws Exception {
 		
 		ProductDTO productDTO = Factory.createProductDTO();
