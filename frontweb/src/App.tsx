@@ -1,4 +1,4 @@
-import 'bootstrap/dist/css/bootstrap.css';
+import './assets/styles/custom.scss';
 import './App.css';
 
 function App() {
